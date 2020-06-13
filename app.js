@@ -5,19 +5,19 @@ const { argv } = process;
 const address = argv[2];
 
 if (address) {
-  geocode(address, (error, locationData) => {
+  geocode(address, (error, data) => {
     if (error) {
       return console.log('ERROR:', error);
     }
-    forecast(locationData, (error, forecastData) =>{
+    forecast(data, (error, { weather, temperature, feelslike, precip }) =>{
       if (error) {
        return console.log('ERROR:', error);
       }
-      console.log('LOCATION:', locationData.location);
-      console.log('WEATHER:', forecastData.weather);
-      console.log('TEMPERATURE:', forecastData.temperature + '° C');
-      console.log('FEELSLIKE:', forecastData.feelslike + '° C');
-      console.log('RAIN PROBABILITY:', forecastData.precip + '%');
+      console.log('LOCATION:', data.location);
+      console.log('WEATHER:', weather);
+      console.log('TEMPERATURE:', temperature + '° C');
+      console.log('FEELSLIKE:', feelslike + '° C');
+      console.log('RAIN PROBABILITY:', precip + '%');
     });
   });
 } else {
